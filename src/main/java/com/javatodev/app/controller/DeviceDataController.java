@@ -4,6 +4,7 @@ import com.javatodev.app.dto.CommonAPIResponse;
 import com.javatodev.app.dto.DeviceDataDto;
 import com.javatodev.app.service.DeviceDataService;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
