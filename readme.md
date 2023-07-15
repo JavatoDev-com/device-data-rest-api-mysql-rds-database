@@ -18,6 +18,7 @@ In this comprehensive guide, we will take you through each step involved in depl
 
 Article Series
 
+- [Setting Up Developer Machine For This Course – Optional](https://javatodev.com/setting-up-developer-machine-for-ecs-fargate-spring-boot-course/)
 - [Setting Up AWS VPC For Fargate Deployment](https://javatodev.com/setting-up-aws-vpc-for-fargate-deployment/)
 - [Publishing Docker Images On Amazon ECR](https://javatodev.com/using-amazon-ecr-for-publishing-docker-images/)
 - [Deploying Amazon RDS MySQL Database](https://javatodev.com/deploying-amazon-rds-mysql-database/)
