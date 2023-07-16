@@ -95,7 +95,7 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = element(aws_subnet.public_subnet.*.id, 0)
   tags = {
-    Name        = "nat-gateway-${var.environment}"
+    Name        = "${var.environment}-nat-gateway"
     Environment = var.environment
   }
 }
@@ -125,75 +125,4 @@ resource "aws_route_table_association" "private" {
   count          = length(var.private_subnets_cidr)
   subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
   route_table_id = aws_route_table.private.id
-}
-
-# Public
-resource "aws_security_group" "public" {
-  name        = "${var.environment}-public-sg"
-  description = "Security group for public subnet"
-  vpc_id      = aws_vpc.vpc.id
-  depends_on = [
-    aws_vpc.vpc
-  ]
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = "0"
-    to_port     = "0"
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Environment = var.environment
-  }
-}
-
-
-# Public
-resource "aws_security_group" "private" {
-  name        = "${var.environment}-private-sg"
-  description = "Security group for private subnet"
-  vpc_id      = aws_vpc.vpc.id
-  depends_on = [
-    aws_vpc.vpc
-  ]
-
-  ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [aws_security_group.public.id]
-  }
-
-  ingress {
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    security_groups = [aws_security_group.public.id]
-  }
-
-  egress {
-    from_port   = "0"
-    to_port     = "0"
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Environment = var.environment
-  }
 }
