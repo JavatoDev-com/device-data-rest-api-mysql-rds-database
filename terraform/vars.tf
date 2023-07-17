@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "environment" {
-  default = "javatodev-development"
+  default = "javatodev"
 }
 
 variable "vpc_cidr" {
