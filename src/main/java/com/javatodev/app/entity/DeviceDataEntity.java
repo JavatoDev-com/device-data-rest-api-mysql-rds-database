@@ -1,5 +1,9 @@
 package com.javatodev.app.entity;
 
+import org.springframework.data.redis.core.RedisHash;
+
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +16,7 @@ import lombok.Setter;
 @Table(name = "device_data")
 @Getter
 @Setter
-public class DeviceDataEntity {
+public class DeviceDataEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
